@@ -25,9 +25,15 @@ class Bug(models.Model):
     title = models.CharField(max_length=30)
     date = models.DateTimeField(default=timezone.now)
     description = models.TextField()
-    author = models.ForeignKey(CustomUser, on_delete=models.SET_NULL)
-    owner = models.ForeignKey(CustomUser, on_delete=models.SET_NULL)
-    closer = models.ForeignKey(CustomUser, on_delete=models.SET_NULL)
+    author = models.ForeignKey(
+        CustomUser, related_name='%(class)s_author', null=True,
+        blank=True, on_delete=models.SET_NULL)
+    owner = models.ForeignKey(
+        CustomUser, related_name='%(class)s_owner', null=True,
+        blank=True, on_delete=models.SET_NULL)
+    closer = models.ForeignKey(
+        CustomUser, related_name='%(class)s_closer', null=True,
+        blank=True, on_delete=models.SET_NULL)
     status = models.CharField(
         max_length=1,
         choices=STATUS_CHOICES,
