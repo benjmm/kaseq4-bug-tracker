@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block content %}
+
+<h3>{{ bug.title }}</h3>
+<div class="date">{{ bug.date}}</div>
+Status: {{ bug.get_status_display }}
+<p>{{bug.description}}</p>
+
+<ul>
+  <li>Author: {{bug.author.display_name}}</li>
+  <li>Assigned to: {{bug.owner.display_name}}</li>
+  <li>Closed by: {{bug.closer.display_name}}</li>
+</ul>
+
+<p><a href="/home">-Return to Home-</a></p>
+
+{% endblock %}

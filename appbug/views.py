@@ -61,3 +61,10 @@ def home_v(request):
     user = request.user
     bugs = Bug.objects.all().order_by('-date')
     return render(request, html, {'user': user, 'bugs': bugs})
+
+
+@ login_required
+def bug_v(request, id):
+    html = "bug_details.html"
+    bug = Bug.objects.get(id=id)
+    return render(request, html, {'bug': bug})
