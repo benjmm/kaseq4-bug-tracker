@@ -74,4 +74,7 @@ def bug_v(request, id):
 def user_v(request, id):
     html = "user_details.html"
     user = CustomUser.objects.get(id=id)
-    return render(request, html, {'user': user})
+    assigned = Bug.objects.filter(owner=id).order_by('-date')
+    filed = Bug.objects.filter(author=id).order_by('-date')
+    completed = Bug.objects.filter(closer=id).order_by('-date')
+    return render(request, html, {'user': user, 'assigned': assigned, 'filed': filed, 'completed': completed})

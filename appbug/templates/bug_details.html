@@ -1,12 +1,14 @@
 {% extends 'base.html' %} {% block content %}
 
 <h3>{{ bug.title }}</h3>
-<div class="date">{{ bug.date}}</div>
-Status: {{ bug.get_status_display }}
 <p>{{bug.description}}</p>
 
 <ul>
-  <li>Author: {{bug.author.display_name}}</li>
+  <li>Submitted: {{ bug.date}}</li>
+  <li>Status: {{ bug.get_status_display }}</li>
+  <li>
+    Author: <a href="/user/{{bug.author.id}}">{{bug.author.display_name}}</a>
+  </li>
   <li>Assigned to: {{bug.owner.display_name}}</li>
   <li>Closed by: {{bug.closer.display_name}}</li>
 </ul>

@@ -2,6 +2,29 @@
 
 <h3>{{ user.display_name }} ({{user}})</h3>
 
+<p>
+Assigned to:
+<ul>
+  {% for bug in assigned %}
+  <li><a href="/bug/{{ bug.id }}">{{ bug }}</a></li>
+  {% endfor %}
+</ul>
+
+Filed:
+<ul>
+  {% for bug in filed %}
+  <li><a href="/bug/{{ bug.id }}">{{ bug }}</a></li>
+  {% endfor %}
+</ul>
+
+Completed:
+<ul>
+  {% for bug in completed %}
+  <li><a href="/bug/{{ bug.id }}">{{ bug }}</a></li>
+  {% endfor %}
+</ul>
+</p>
+
 <p><a href="/home">-Return to Home-</a></p>
 
 {% endblock %}

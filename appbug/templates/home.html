@@ -2,16 +2,17 @@
 
 <h1>Home</h1>
 
+Welcome, <a href="/user/{{user.id}}">{{user.display_name}}</a>. {% if bugs %}
+<p>
 <ul>
-  <li>User Name: <b>{{user.username}}</b></li>
-  <li>Display Name: <b>{{user.display_name}}</b></li>
+  {%for bug in bugs%}
+
+  <li>{% include 'bug_blob.html' %}</li>
+
+  {% endfor %}
 </ul>
-
-{% if bugs %} {% for bug in bugs%}
-
-<p>{% include 'bug_blob.html' %}</p>
-
-{% endfor %} {% else %}
+</p>
+{% else %}
 
 <h3>No bugs.</h3>
 
