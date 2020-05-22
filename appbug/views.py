@@ -68,3 +68,10 @@ def bug_v(request, id):
     html = "bug_details.html"
     bug = Bug.objects.get(id=id)
     return render(request, html, {'bug': bug})
+
+
+@ login_required
+def user_v(request, id):
+    html = "user_details.html"
+    user = CustomUser.objects.get(id=id)
+    return render(request, html, {'user': user})
