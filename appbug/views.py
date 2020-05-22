@@ -2,7 +2,7 @@ from django.shortcuts import render, reverse, HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from appbug.models import CustomUser
-from appbug.forms import login_f, user_f
+from appbug.forms import LoginForm, CustomUserCreationForm, CustomUserChangeForm
 
 
 def index_v(request):
@@ -18,7 +18,7 @@ def error_v(request):
 # def register_v(request):
 #     html = "form.html"
 #     if request.method == "POST":
-#         form = user_f(request.POST)
+#         form = CustomUserCreationForm(request.POST)
 #         if form.is_valid():
 #             data = form.cleaned_data
 #             CustomUser.objects.create_user(
@@ -30,13 +30,13 @@ def error_v(request):
 #             if user:
 #                 login(request, user)
 #                 return HttpResponseRedirect(reverse('home'))
-#     form = user_f()
+#     form = CustomUserCreationForm()
 #     return render(request, html, {'form': form})
 
 
 def login_v(request):
     if request.method == "POST":
-        form = login_f(request.POST)
+        form = LoginForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
             user = authenticate(
@@ -45,7 +45,7 @@ def login_v(request):
                 login(request, user)
                 return HttpResponseRedirect(
                     request.GET.get('next', reverse('home')))
-    form = login_f()
+    form = LoginForm()
     return render(request, 'form.html', {'form': form})
 
 
