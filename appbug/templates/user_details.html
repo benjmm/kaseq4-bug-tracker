@@ -1,5 +1,8 @@
 {% extends 'base.html' %} {% block content %}
 
+<h2>User Details</h2>
+<p><a href="/home">-Return to Home-</a></p>
+
 <h3>{{ user.display_name }} ({{user}})</h3>
 
 <p>
@@ -24,7 +27,5 @@ Completed:
   {% endfor %}
 </ul>
 </p>
-
-<p><a href="/home">-Return to Home-</a></p>
 
 {% endblock %}

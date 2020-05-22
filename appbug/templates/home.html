@@ -4,6 +4,9 @@
 
 Welcome, <a href="/user/{{user.id}}">{{user.display_name}}</a>.
 
+<p>
+  <a href="/logout">-Log Out-</a>
+</p>
 
 <p>
   <h4>New bugs:</h4>
@@ -67,12 +70,6 @@ Welcome, <a href="/user/{{user.id}}">{{user.display_name}}</a>.
 
 <h6>No invalid bugs.</h6>
 {% endif %}
-</p>
-
-
-
-<p>
-  <a href="/logout">-Log Out-</a>
 </p>
 
 {% endblock %}

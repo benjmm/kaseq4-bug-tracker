@@ -1,5 +1,8 @@
 {% extends 'base.html' %} {% block content %}
 
+<h2>Bug Details</h2>
+<p><a href="/home">-Return to Home-</a></p>
+
 <h3>{{ bug.title }}</h3>
 <p>{{bug.description}}</p>
 
@@ -12,7 +15,5 @@
   <li>Assigned to: {{bug.owner.display_name}}</li>
   <li>Closed by: {{bug.closer.display_name}}</li>
 </ul>
-
-<p><a href="/home">-Return to Home-</a></p>
 
 {% endblock %}
