@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
-# Create your models here.
+from django.utils import timezone
 
 
 class CustomUser(AbstractUser):
@@ -9,3 +8,31 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+
+class Bug(models.Model):
+    NEW = 'N'
+    IN_PROGRESS = 'P'
+    DONE = 'D'
+    INVALID = 'I'
+    STATUS_CHOICES = [
+        (NEW, 'New'),
+        (IN_PROGRESS, 'In Progress'),
+        (DONE, 'Done'),
+        (INVALID, 'Invalid'),
+    ]
+
+    title = models.CharField(max_length=30)
+    date = models.DateTimeField(default=timezone.now)
+    description = models.TextField()
+    author = models.ForeignKey(CustomUser, on_delete=models.SET_NULL)
+    owner = models.ForeignKey(CustomUser, on_delete=models.SET_NULL)
+    closer = models.ForeignKey(CustomUser, on_delete=models.SET_NULL)
+    status = models.CharField(
+        max_length=1,
+        choices=STATUS_CHOICES,
+        default=NEW,
+    )
+
+    def __str__(self):
+        return self.title
