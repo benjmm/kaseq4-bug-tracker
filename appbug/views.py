@@ -1,7 +1,7 @@
 from django.shortcuts import render, reverse, HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from appbug.models import CustomUser
+from appbug.models import CustomUser, Bug
 from appbug.forms import LoginForm, CustomUserCreationForm, CustomUserChangeForm
 
 
@@ -59,4 +59,5 @@ def logout_v(request):
 def home_v(request):
     html = 'home.html'
     user = request.user
-    return render(request, html, {'user': user})
+    bugs = Bug.objects.all().order_by('-date')
+    return render(request, html, {'user': user, 'bugs': bugs})

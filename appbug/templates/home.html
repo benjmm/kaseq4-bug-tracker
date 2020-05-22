@@ -7,6 +7,16 @@
   <li>Display Name: <b>{{user.display_name}}</b></li>
 </ul>
 
+{% if bugs %} {% for bug in bugs%}
+
+<p>{% include 'bug_blob.html' %}</p>
+
+{% endfor %} {% else %}
+
+<h3>No bugs.</h3>
+
+{% endif %}
+
 <ul>
   <li><a href="/logout">Log Out</a></li>
 </ul>
