@@ -12,8 +12,12 @@
   <li>
     Author: <a href="/user/{{bug.author.id}}">{{bug.author.display_name}}</a>
   </li>
-  <li>Assigned to: {{bug.owner.display_name}}</li>
-  <li>Closed by: {{bug.closer.display_name}}</li>
+  <li>
+    Assigned to: <a href="/user/{{bug.owner.id}}">{{bug.owner.display_name}}</a>
+  </li>
+  <li>
+    Closed by: <a href="/user/{{bug.closer.id}}">{{bug.closer.display_name}}</a>
+  </li>
 </ul>
 
 {% endblock %}
