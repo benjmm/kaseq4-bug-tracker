@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import CustomUser
+from .models import CustomUser, Bug
 
 
 class LoginForm(forms.Form):
@@ -26,3 +26,16 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = ('username', 'email')
+
+# class AddBugForm(forms.Form):
+#     title = forms.CharField(max_length=30)
+#     description = forms.CharField(widget=forms.Textarea)
+
+
+class AddBugForm(forms.ModelForm):
+    class Meta:
+        model = Bug
+        fields = [
+            'title',
+            'description'
+        ]

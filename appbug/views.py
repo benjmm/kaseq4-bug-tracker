@@ -2,7 +2,7 @@ from django.shortcuts import render, reverse, HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from appbug.models import CustomUser, Bug
-from appbug.forms import LoginForm, CustomUserCreationForm, CustomUserChangeForm
+from appbug.forms import LoginForm, CustomUserCreationForm, CustomUserChangeForm, AddBugForm
 
 
 def index_v(request):
@@ -82,3 +82,25 @@ def user_v(request, id):
     filed = Bug.objects.filter(author=id).order_by('-date')
     completed = Bug.objects.filter(closer=id).order_by('-date')
     return render(request, html, {'user': user, 'assigned': assigned, 'filed': filed, 'completed': completed})
+
+
+@login_required
+def addbug_v(request):
+    html = "form.html"
+
+    if request.method == 'POST':
+        form = AddBugForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            Bug.objects.create(
+                title=data['title'],
+                description=data['description'],
+                author=request.user,
+                status='N'
+            )
+            # return HttpResponseRedirect(reverse('bug', kwargs={'id': Bug.objects.get('title' == data['title']).id}))
+            return HttpResponseRedirect(reverse('home'))
+
+    form = AddBugForm()
+
+    return render(request, html, {"form": form})
