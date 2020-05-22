@@ -59,8 +59,12 @@ def logout_v(request):
 def home_v(request):
     html = 'home.html'
     user = request.user
-    bugs = Bug.objects.all().order_by('-date')
-    return render(request, html, {'user': user, 'bugs': bugs})
+    # bugs = Bug.objects.all().order_by('-date')
+    new = Bug.objects.filter(status='N').order_by('-date')
+    in_progress = Bug.objects.filter(status='P').order_by('-date')
+    done = Bug.objects.filter(status='D').order_by('-date')
+    invalid = Bug.objects.filter(status='I').order_by('-date')
+    return render(request, html, {'user': user, 'new': new, 'in_progress': in_progress, 'done': done, 'invalid': invalid})
 
 
 @ login_required

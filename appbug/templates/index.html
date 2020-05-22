@@ -2,12 +2,21 @@
 
 <h1>Index</h1>
 
-<p>Are you logged in? {{ request.user.is_authenticated }}</p>
+<p>
+{% if request.user.is_authenticated %}
 
-<ul>
-  <li><a href="/login">Log In</a></li>
-  <li><a href="/logout">Log Out</a></li>
-  <!-- <li><a href="/register">Register</a></li> -->
-</ul>
+<p>You are currently logged in as {{ request.user.display_name }}.</p>
+
+<p><a href="/logout">-Log Out-</a></p>
+
+{% else %}
+
+<p>You are not logged in.</p>
+
+<p><a href="/login">-Log In-</a></p>
+
+{% endif %}
+
+</p>
 
 {% endblock %}

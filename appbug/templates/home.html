@@ -2,24 +2,77 @@
 
 <h1>Home</h1>
 
-Welcome, <a href="/user/{{user.id}}">{{user.display_name}}</a>. {% if bugs %}
+Welcome, <a href="/user/{{user.id}}">{{user.display_name}}</a>.
+
+
 <p>
+  <h4>New bugs:</h4>
+{% if new %}
 <ul>
-  {%for bug in bugs%}
+  {%for bug in new%}
 
   <li>{% include 'bug_blob.html' %}</li>
 
   {% endfor %}
 </ul>
-</p>
 {% else %}
 
-<h3>No bugs.</h3>
-
+<h6>No new bugs.</h6>
 {% endif %}
+</p>
 
+<p>
+  <h4>In Progress bugs:</h4>
+{% if in_progress %}
 <ul>
-  <li><a href="/logout">Log Out</a></li>
+  {%for bug in in_progress%}
+
+  <li>{% include 'bug_blob.html' %}</li>
+
+  {% endfor %}
 </ul>
+{% else %}
+
+<h6>No bugs in progress.</h6>
+{% endif %}
+</p>
+
+<p>
+  <h4>Completed bugs:</h4>
+{% if complted %}
+<ul>
+  {%for bug in completed%}
+
+  <li>{% include 'bug_blob.html' %}</li>
+
+  {% endfor %}
+</ul>
+{% else %}
+
+<h6>No completed bugs.</h6>
+{% endif %}
+</p>
+
+<p>
+  <h4>Invalid bugs:</h4>
+{% if invalid %}
+<ul>
+  {%for bug in invalid%}
+
+  <li>{% include 'bug_blob.html' %}</li>
+
+  {% endfor %}
+</ul>
+{% else %}
+
+<h6>No invalid bugs.</h6>
+{% endif %}
+</p>
+
+
+
+<p>
+  <a href="/logout">-Log Out-</a>
+</p>
 
 {% endblock %}
