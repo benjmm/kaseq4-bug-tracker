@@ -134,3 +134,15 @@ def markinvalid_v(request, id):
     bug.owner = None
     bug.save()
     return HttpResponseRedirect(reverse('bug', kwargs={'id': id}))
+
+
+@login_required
+def editbug_v(request, id):
+    bug = Bug.objects.get(id=id)
+    if request.method == 'POST':
+        form = AddBugForm(request.POST, instance=bug)
+        form.save()
+        return HttpResponseRedirect(reverse('bug', args=(id,)))
+
+    form = AddBugForm(instance=bug)
+    return render(request, "form.html", {'form': form})
