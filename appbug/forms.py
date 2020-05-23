@@ -8,11 +8,6 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
 
 
-# class user_f(forms.Form):
-#     username = forms.CharField(max_length=50)
-#     password = forms.CharField(widget=forms.PasswordInput)
-
-
 class CustomUserCreationForm(UserCreationForm):
     display_name = forms.CharField(max_length=50)
 
@@ -26,10 +21,6 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = ('username', 'email')
-
-# class AddBugForm(forms.Form):
-#     title = forms.CharField(max_length=30)
-#     description = forms.CharField(widget=forms.Textarea)
 
 
 class AddBugForm(forms.ModelForm):

@@ -2,7 +2,7 @@ from django.shortcuts import render, reverse, HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from appbug.models import CustomUser, Bug
-from appbug.forms import LoginForm, CustomUserCreationForm, CustomUserChangeForm, AddBugForm
+from appbug.forms import (LoginForm, AddBugForm)
 
 
 def index_v(request):
@@ -13,25 +13,6 @@ def index_v(request):
 def error_v(request):
     html = "error.html"
     return render(request, html)
-
-
-# def register_v(request):
-#     html = "form.html"
-#     if request.method == "POST":
-#         form = CustomUserCreationForm(request.POST)
-#         if form.is_valid():
-#             data = form.cleaned_data
-#             CustomUser.objects.create_user(
-#                 username=data['username'],
-#                 password=data['password'],
-#             )
-#             user = authenticate(
-#                 request, username=data['username'], password=data['password'])
-#             if user:
-#                 login(request, user)
-#                 return HttpResponseRedirect(reverse('home'))
-#     form = CustomUserCreationForm()
-#     return render(request, html, {'form': form})
 
 
 def login_v(request):
@@ -59,7 +40,6 @@ def logout_v(request):
 def home_v(request):
     html = 'home.html'
     user = request.user
-    # bugs = Bug.objects.all().order_by('-date')
     new = Bug.objects.filter(status='N').order_by('-date')
     in_progress = Bug.objects.filter(status='P').order_by('-date')
     done = Bug.objects.filter(status='D').order_by('-date')
@@ -81,7 +61,8 @@ def user_v(request, id):
     assigned = Bug.objects.filter(owner=id).order_by('-date')
     filed = Bug.objects.filter(author=id).order_by('-date')
     completed = Bug.objects.filter(closer=id).order_by('-date')
-    return render(request, html, {'user': user, 'assigned': assigned, 'filed': filed, 'completed': completed})
+    return render(request, html, {'user': user, 'assigned': assigned,
+                                  'filed': filed, 'completed': completed})
 
 
 @login_required
@@ -98,7 +79,8 @@ def addbug_v(request):
                 author=request.user,
                 status='N'
             )
-            # return HttpResponseRedirect(reverse('bug', kwargs={'id': Bug.objects.get('title' == data['title']).id}))
+            # return HttpResponseRedirect(reverse('bug', kwargs={
+            #     'id': Bug.objects.get('title' == data['title']).id}))
             return HttpResponseRedirect(reverse('home'))
 
     form = AddBugForm()
