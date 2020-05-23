@@ -46,9 +46,10 @@ Welcome, <a href="/user/{{user.id}}">{{user.display_name}}</a>.
 
 <p>
   <h4>Completed bugs:</h4>
-{% if complted %}
+
+{% if done %}
 <ul>
-  {%for bug in completed%}
+  {%for bug in done%}
 
   <li>{% include 'bug_blob.html' %}</li>
 

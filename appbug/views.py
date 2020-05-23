@@ -104,3 +104,12 @@ def addbug_v(request):
     form = AddBugForm()
 
     return render(request, html, {"form": form})
+
+
+def markdone_v(request, id):
+    bug = Bug.objects.get(id=id)
+    bug.status = 'D'
+    bug.completed = bug.owner
+    bug.owner = None
+    bug.save()
+    return HttpResponseRedirect(reverse('bug', kwargs={'id': id}))

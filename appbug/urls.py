@@ -11,4 +11,5 @@ urlpatterns = [
     path('bug/<int:id>/', views.bug_v, name='bug'),
     path('user/<int:id>/', views.user_v, name='user'),
     path('addbug/', views.addbug_v, name='addbug'),
+    path('markdone/<int:id>/', views.markdone_v, name='markdone'),
 ]
