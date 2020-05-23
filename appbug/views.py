@@ -107,6 +107,16 @@ def addbug_v(request):
 
 
 @login_required
+def assigntome_v(request, id):
+    bug = Bug.objects.get(id=id)
+    bug.status = 'P'
+    bug.owner = request.user
+    bug.closer = None
+    bug.save()
+    return HttpResponseRedirect(reverse('bug', kwargs={'id': id}))
+
+
+@login_required
 def markdone_v(request, id):
     bug = Bug.objects.get(id=id)
     bug.status = 'D'

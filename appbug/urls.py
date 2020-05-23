@@ -11,6 +11,7 @@ urlpatterns = [
     path('bug/<int:id>/', views.bug_v, name='bug'),
     path('user/<int:id>/', views.user_v, name='user'),
     path('addbug/', views.addbug_v, name='addbug'),
+    path('assigntome/<int:id>/', views.assigntome_v, name='assigntome'),
     path('markdone/<int:id>/', views.markdone_v, name='markdone'),
     path('markinvalid/<int:id>/', views.markinvalid_v, name='markinvalid'),
 ]
