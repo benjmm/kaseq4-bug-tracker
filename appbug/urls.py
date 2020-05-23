@@ -12,4 +12,5 @@ urlpatterns = [
     path('user/<int:id>/', views.user_v, name='user'),
     path('addbug/', views.addbug_v, name='addbug'),
     path('markdone/<int:id>/', views.markdone_v, name='markdone'),
+    path('markinvalid/<int:id>/', views.markinvalid_v, name='markinvalid'),
 ]

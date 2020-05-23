@@ -106,10 +106,21 @@ def addbug_v(request):
     return render(request, html, {"form": form})
 
 
+@login_required
 def markdone_v(request, id):
     bug = Bug.objects.get(id=id)
     bug.status = 'D'
-    bug.completed = bug.owner
+    bug.closer = bug.owner
+    bug.owner = None
+    bug.save()
+    return HttpResponseRedirect(reverse('bug', kwargs={'id': id}))
+
+
+@login_required
+def markinvalid_v(request, id):
+    bug = Bug.objects.get(id=id)
+    bug.status = 'I'
+    bug.closer = None
     bug.owner = None
     bug.save()
     return HttpResponseRedirect(reverse('bug', kwargs={'id': id}))
